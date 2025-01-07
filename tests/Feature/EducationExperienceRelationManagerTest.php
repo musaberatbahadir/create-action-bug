@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\RelationManagers\EducationExperienceRelationManager;
+use App\Models\Profile;
 use App\Models\User;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -12,7 +13,9 @@ class EducationExperienceRelationManagerTest extends TestCase
 {
     public function test_create_experience()
     {
-        $user = User::factory()->create();
+        $user = User::factory()
+            ->has(Profile::factory())
+            ->create();
 
         $this->actingAs($user);
 

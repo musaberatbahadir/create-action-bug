@@ -35,7 +35,12 @@ class EducationExperienceRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->mutateFormDataUsing(function ($data) {
+                    $data['profile_id'] = $this->ownerRecord
+                        ->profile
+                        ->id;
+                    return $data;
+                }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
